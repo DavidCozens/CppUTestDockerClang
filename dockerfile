@@ -3,15 +3,19 @@ LABEL Description="Image for running CppUTest with Clang"
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-# Add LLVM apt repository for Clang 19
+# Add LLVM and GitHub CLI apt repositories
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates gnupg wget \
     && wget -qO- https://apt.llvm.org/llvm-snapshot.gpg.key \
         | gpg --dearmor > /usr/share/keyrings/llvm-archive-keyring.gpg \
     && echo "deb [signed-by=/usr/share/keyrings/llvm-archive-keyring.gpg] http://apt.llvm.org/bookworm/ llvm-toolchain-bookworm-19 main" \
         > /etc/apt/sources.list.d/llvm.list \
+    && wget -qO- https://cli.github.com/packages/githubcli-archive-keyring.gpg \
+        > /usr/share/keyrings/githubcli-archive-keyring.gpg \
+    && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" \
+        > /etc/apt/sources.list.d/github-cli.list \
     && apt-get update && apt-get install -y --no-install-recommends \
-    autoconf automake clang-19 clang-format-19 clang-tidy-19 cmake cppcheck gdb git lcov libtool make sudo \
+    autoconf automake clang-19 clang-format-19 clang-tidy-19 cmake cppcheck gdb gh git lcov libtool make sudo \
     && rm -rf /var/lib/apt/lists/*
 
 # Set clang-19 as the default cc, c++, clang-format, and clang-tidy
