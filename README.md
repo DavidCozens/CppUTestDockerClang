@@ -16,18 +16,30 @@ Companion to [CppUTestDocker](https://github.com/DavidCozens/CppUTestDocker) whi
 
 ## Usage
 
+Pull the image from the GitHub Container Registry:
+
+```
+docker pull ghcr.io/davidcozens/cpputest-clang:latest
+```
+
 Run tests by mounting your project directory to `/home/src`:
 
 ```
-docker run -v <path>:/home/src davidcozens/cpputest-clang make
+docker run -v <path>:/home/src ghcr.io/davidcozens/cpputest-clang make
 ```
 
 The `CPPUTEST_HOME` environment variable is set to `/home/cpputest` inside the container.
 
+For production use and traceability, prefer a specific SHA tag over `latest`. Each build is tagged with the commit SHA it was built from (e.g. `sha-abc1234`). Available tags can be found on the [package page](https://github.com/davidcozens/CppUTestDockerClang/pkgs/container/cpputest-clang):
+
+```
+docker run -v <path>:/home/src ghcr.io/davidcozens/cpputest-clang:sha-<commit-sha> make
+```
+
 ## Building
 
-The image is built automatically via GitHub Actions on each push to `main` and pushed to
-DockerHub as `davidcozens/cpputest-clang`.
+The image is built automatically via GitHub Actions on each push to `main` and pushed to the
+[GitHub Container Registry](https://ghcr.io) as `ghcr.io/davidcozens/cpputest-clang`.
 
 To build locally:
 
