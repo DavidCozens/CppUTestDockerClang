@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" \
         > /etc/apt/sources.list.d/github-cli.list \
     && apt-get update && apt-get install -y --no-install-recommends \
-    autoconf automake clang-19 clang-format-19 clang-tidy-19 cmake cppcheck gdb gh git lcov libtool make sudo \
+    autoconf automake clang-19 clang-format-19 clang-tidy-19 cmake cppcheck gdb gh git lcov libssl-dev libtool make sudo \
     && rm -rf /var/lib/apt/lists/*
 
 # Set clang-19 as the default cc, c++, clang-format, and clang-tidy
