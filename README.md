@@ -9,6 +9,7 @@ Companion to [CppUTestDocker](https://github.com/DavidCozens/CppUTestDocker) whi
 - CppUTest v4.0 (compiled with Clang, `-fPIC` for PIE-compatible linking)
 - clang-format 19
 - clang-tidy 19
+- include-what-you-use 0.23 (built from source against clang-19; matched ABI is required for correct suggestions)
 - CMake
 - cppcheck
 - lcov
